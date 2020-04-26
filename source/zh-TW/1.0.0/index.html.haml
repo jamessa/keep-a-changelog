@@ -1,6 +1,6 @@
 ---
-description: 如何維護更新日誌
-title: 如何維護更新日誌
+description: 如何維護變動誌
+title: 如何維護變動誌
 language: zh-TW
 version: 1.0.0
 ---
@@ -19,8 +19,8 @@ version: 1.0.0
 
 .header
   .title
-    %h1 如何維護更新日誌
-    %h2 更新日誌絕對不應該只是 git log 的堆砌物
+    %h1 keep a 變動誌
+    %h2 變動誌不只是git log
 
   = link_to changelog do
     Version
@@ -31,120 +31,124 @@ version: 1.0.0
 .answers
   %h3#what
     %a.anchor{ href: "#what", aria_hidden: "true" }
-    更新日誌是什麼？
+    變動誌是什麼？
 
   %p
-    更新日誌（Changelog）是個記錄專案演進版本間的差異，以時間倒敘、由人工攥寫的列表。
+    變動誌（Changelog）是以時間倒敘記錄專案每個版本變化的檔案。
 
   %h3#why
     %a.anchor{ href: "#why", aria_hidden: "true" }
-    為什麼需要提供更新日誌？
+    為什麼要寫變動誌？
 
   %p
-    為了讓使用者和開發人員更簡單明確地了解各個版本之間有著哪些改動。
+    為了讓使用者與開發者可以了解各個版本之間的變動。
 
   %h3#who
     %a.anchor{ href: "#who", aria_hidden: "true" }
-    哪些人需要更新日誌？
+    誰需要變動誌？
 
   %p
-    大家都需要更新日誌。無論是使用者還是開發者，軟體最終的用戶都會在意軟體包含了什麼。當軟體更新了，大家會希望知道改了什麼、為什麼要改。
+    人都需要變動誌。無論是使用者還是開發者，都會關心軟體包含了什麼。每當軟體更新了，大家都會希望知道發生什麼事。
 
 .good-practices
   %h3#how
     %a.anchor{ href: "#how", aria_hidden: "true" }
-    如何寫出高品質的日誌？
+    如何寫出高品質的變動誌？
 
   %h4#principles
     %a.anchor{ href: "#principles", aria_hidden: "true" }
-    指導原則
+    原則
 
   %ul
     %li
-      日誌是寫給「人」看的，不是機器。
+      變動誌是寫給
+      %strong
+        人
+      看的，不是機器。
     %li
-      每個版本都應該有獨立的進入點。
+      每個版本都應該有獨立的項目。
     %li
-      相同類型的改動應分組放置。
+      相同類型的變動放入同一個節。
     %li
-      版本與章節應「可連結化」。
+      版本與節要可以連結。
     %li
-      新版本總是寫在前面。
+      新版本在前。
     %li
-      每個版本都該註記發佈日期。
+      寫下每個版本的發佈日期。
     %li
-      版本命名應遵守#{link_to "語意化版本", semver}格式。
+      說明是否依循#{link_to "語意化版本", semver}格式。
 
   %a.anchor{ href: "#types", aria_hidden: "true" }
-  %h4#types 改動類型
+  %h4#types 變動的種類有
 
   %ul
     %li
       %code Added
-      當增加了新功能。
+      增加功能。
     %li
       %code Changed
-      當更動了既有的功能。
+      更動既有的功能。
     %li
       %code Deprecated
-      當功能將在近期被移除。
+      作廢，即將刪除。
     %li
       %code Removed
-      當移除了現有的功能。
+      刪除現有的功能。
     %li
       %code Fixed
-      當修復了某些錯誤。
+      修復錯誤。
     %li
       %code Security
-      當增進了安全性漏洞。
+      修補安全性漏洞。
 
 .effort
 
   %h3#effort
     %a.anchor{ href: "#effort", aria_hidden: "true" }
-    如何提升維護更新日誌的效率？
+    如何輕鬆維護變動誌？
 
   %p
-    在日誌上方使用 <code>Unreleased</code> 區塊記錄即將發佈的更新內容。
+    把還沒發佈的變動，寫在變動誌最上方的<code>Unreleased</code>一節，
 
-  %p 這麼做能夠：
+  %p 這麼做好處是：
 
   %ul
     %li
-      讓大家知道在未來的版本中可能會有哪些改動。
+      讓大家知道可能的變動。
     %li
-      發佈新版本時，直接將 <code>Unreleased</code> 移到新版本的區塊就完成了 ヾ(*´ω｀*)ノ
+      等到要發佈新版本時，直接將<code>Unreleased</code>改成新版本好了。
 
 .bad-practices
   %h3#bad-practices
     %a.anchor{ href: "#bad-practices", aria_hidden: "true" }
-    難道日誌能寫得很糟嗎？
+    變動誌能寫的多糟？
 
   %p 當然。下面有些糟糕的範例：
 
   %h4#log-diffs
     %a.anchor{ href: "#log-diffs", aria_hidden: "true" }
-    🚫 直接使用 git log
+    🚫 直接拿commit log來用
 
   %p
-    使用 git log 作為更新日誌絕對不是個好主意：git log 充滿了各種無意義的訊息，像 merge commits
+    千萬別把commit log當作變動誌。commit log充滿了雜訊，譬如merge commits
     、亂七八糟的提交訊息、文件更新等。
 
   %p
-    Commits 的目的應該是記錄原始碼的演化過程。有些項目會清理 commits，有些卻不會。
+    Commits的目的是記錄原始碼的演化，有些專案會清理commits，但是大部分都不會。
 
   %p
-    更新日誌的目的則是記錄那些值得一提的改動，經常涵蓋多個 commits，最終目的仍是讓使用者一目了然。
+    變動誌的目的是記錄那些重要的變動，常常包涵多個commits，讓使用者可以一目了然。
 
   %h4#ignoring-deprecations
     %a.anchor{ href: "#ignoring-deprecations", aria_hidden: "true" }
-    🚫 忽略 Deprecations
+    🚫 忽略Deprecations
 
   %p
-    當使用者升級版本時，他應該要能預先知道哪些環節可能會出問題。理想的情形下，應該讓使用者有空間能預先升級即將被棄用的功能；待替換掉棄用功能之後，再升級至棄用功能被真正移除的版本。
+    當使用者升級時，他應該要能預先知道哪些環節可能會出問題。理想的情形下，應該讓使用者
+    有空間能預先升級即將被棄用的功能；待替換掉棄用功能之後，再升級至棄用功能被真正移除的版本。
 
   %p
-    即使不這麼做，也要在更新日誌中列出棄用的、移除的、或是任何可能導致程式碼失效的重大改動。
+    即使不這麼做，也要在變動誌中列出棄用的、移除的、或是任何可能導致程式碼失效的重大改動。
 
   %h4#confusing-dates
     %a.anchor{ href: "#confusing-dates", aria_hidden: "true" }
@@ -170,19 +174,19 @@ version: 1.0.0
     有沒有標準格式可以參考呢？
 
   %p
-    並沒有。雖然有 #{link_to "GNU 更新日誌指南", gnu_changelog_styleguide} 以及只有兩段長的
+    並沒有。雖然有 #{link_to "GNU 變動誌指南", gnu_changelog_styleguide} 以及只有兩段長的
     #{link_to "GNU - The NEWS File 指南", gnu_the_news}（括弧笑），但這些並不足以稱為「標準」。
 
   %p
     這項專案的宗旨在於提供一個
-    #{link_to "更好的更新日誌範例", changelog}，源於觀察開源社群中優秀的實際案例，把它們蒐集在一起。
+    #{link_to "更好的變動誌範例", changelog}，源於觀察開源社群中優秀的實際案例，把它們蒐集在一起。
 
   %p
     歡迎各位#{link_to "提供", issues}有建設性的建議和批評。
 
   %h4#filename
     %a.anchor{ href: "#filename", aria_hidden: "true" }
-    更新日誌的檔案名稱應該是？
+    變動誌的檔案名稱應該是？
 
   %p
     通常使用 <code>CHANGELOG.md</code>。也有用
@@ -213,7 +217,7 @@ version: 1.0.0
 
   %h4#automatic
     %a.anchor{ href: "#automatic", aria_hidden: "true" }
-    更新日誌能被自動生成嗎？
+    變動誌能被自動生成嗎？
 
   %p
     非常困難，各式各樣的提交訊息和檔案名稱難以完全掌握。
@@ -221,7 +225,7 @@ version: 1.0.0
   %p
     另外，有些開源專案使用由 Gemnasium
     團隊開發的 #{link_to "Vandamme", vandamme}
-    轉換更新日誌，或許可以當作參考。
+    轉換變動誌，或許可以當作參考。
 
   %h4#yanked
     %a.anchor{ href: "#yanked", aria_hidden: "true" }
@@ -241,7 +245,7 @@ version: 1.0.0
 
   %p
     當然可以，總是會有好的原因來改善以往寫下的日誌。我也時常發 pull request
-    給更新日誌不齊全的開源專案。
+    給變動誌不齊全的開源專案。
 
   %p
     偶爾會發現自己遺漏了某項重大更新的紀錄，很明顯你應該補齊它們。
@@ -262,4 +266,4 @@ version: 1.0.0
 .press
   %h3 訪談
   %p
-    我在 #{link_to "The Changelog podcast", thechangelog} 上講述了為什麼維護者與協作者應該在意更新日誌，以及建立這項專案背後的契機。
+    我在 #{link_to "The Changelog podcast", thechangelog} 上講述了為什麼維護者與協作者應該在意變動誌，以及建立這項專案背後的契機。
